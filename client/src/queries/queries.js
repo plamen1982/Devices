@@ -1,8 +1,8 @@
 import { gql } from "apollo-boost"; // gql is the tool that helping us to construct the query, since GraphQL is not a javascript, but rather diff language
 
-const getAuthorsQuery = gql`
+const getUsersQuery = gql`
   {
-    authors {
+    users {
       name
       id
     }
@@ -24,7 +24,7 @@ const getDeviceQuery = gql`
       id
       name
       genre
-      author {
+      user {
         id
         name
         age
@@ -37,10 +37,10 @@ const getDeviceQuery = gql`
   }
 `;
 
-//$name, $genre and $authorId are comming where addDeviceMutation is called and what is inside the variables object
+//$name, $genre and $userId are comming where addDeviceMutation is called and what is inside the variables object
 const addDeviceMutation = gql`
-  mutation AddDevice($name: String!, $genre: String!, $authorId: ID!) {
-    addDevice(name: $name, genre: $genre, authorId: $authorId) {
+  mutation AddDevice($name: String!, $genre: String!, $userId: ID!) {
+    addDevice(name: $name, genre: $genre, userId: $userId) {
       name
       id
     }
@@ -48,4 +48,4 @@ const addDeviceMutation = gql`
 `;
 //String! - or ! means non empty in this case String
 
-export { getAuthorsQuery, getDevicesQuery, addDeviceMutation, getDeviceQuery };
+export { getUsersQuery, getDevicesQuery, addDeviceMutation, getDeviceQuery };

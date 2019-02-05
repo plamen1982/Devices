@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { graphql, compose } from "react-apollo"; // graphql is the tool that helping us to bind the data from the query with the component
-import { getAuthorsQuery, addDeviceMutation, getDevicesQuery } from "../queries/queries";
+import { getUsersQuery, addDeviceMutation, getDevicesQuery } from "../queries/queries";
 
 class AddDevice extends Component {
   constructor(props) {
@@ -8,24 +8,24 @@ class AddDevice extends Component {
     this.state = {
       name: "",
       genre: "",
-      authorId: ""
+      userId: ""
     };
   }
-  renderAuthors() {
+  renderUsers() {
     const {
-      getAuthorsQuery: { authors }
+      getUsersQuery: { users }
     } = this.props;
     const {
-      getAuthorsQuery: { loading }
+      getUsersQuery: { loading }
     } = this.props;
     if (loading) {
-      return <option>Loading Authors...</option>;
+      return <option>Loading Users...</option>;
     }
 
-    return authors.map(author => {
+    return users.map(user => {
       return (
-        <option key={author.id} value={author.id}>
-          {author.name}
+        <option key={user.id} value={user.id}>
+          {user.name}
         </option>
       );
     });
@@ -37,7 +37,7 @@ class AddDevice extends Component {
         variables: {
             name: this.state.name,
             genre: this.state.genre,
-            authorId: this.state.authorId,
+            userId: this.state.userId,
         },
         refetchQueries: [{
             query: getDevicesQuery
@@ -65,10 +65,10 @@ class AddDevice extends Component {
           />
         </div>
         <div className="field">
-          <label>Author:</label>
-          <select onChange={e => this.setState({ authorId: e.target.value })} required>
-            <option>Select author</option>
-            {this.renderAuthors()}
+          <label>User:</label>
+          <select onChange={e => this.setState({ userId: e.target.value })} required>
+            <option>Select User</option>
+            {this.renderUsers()}
           </select>
         </div>
         <button>+</button>
@@ -78,7 +78,7 @@ class AddDevice extends Component {
 }
 
 export default compose(
-  graphql(getAuthorsQuery, { name: "getAuthorsQuery" }), // getAuthorsQuery is going to be attached to this.props and inside is going to be the authors array
+  graphql(getUsersQuery, { name: "getUsersQuery" }), // getUsersQuery is going to be attached to this.props and inside is going to be the users array
   graphql(addDeviceMutation, { name: "addDeviceMutation" }) // addDeviceMutation is going to be attached to this.props
 )(AddDevice); //when component renders the data is requested with the query and the binding with the
 //component and the information from the query is stored in the this.props

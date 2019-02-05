@@ -1,6 +1,6 @@
 const graphql = require('graphql');
 const Device = require('../models/device');
-const Author = require('../models/author');
+const User = require('../models/user');
 
 const { 
     GraphQLObjectType, 
@@ -18,25 +18,25 @@ const DeviceType = new GraphQLObjectType({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
         genre: { type: GraphQLString },
-        author: {
-            type: AuthorType,
+        user: {
+            type: UserType,
             resolve(parent, args) {
-                return Author.findById(parent.authorId);
+                return User.findById(parent.userId);
             }
         }
     })
 });
 
-const AuthorType = new GraphQLObjectType({
-    name: 'Author',
+const UserType = new GraphQLObjectType({
+    name: 'User',
     fields: () => ({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
         age: { type: GraphQLInt },
-        Devices: {
+        devices: {
             type: new GraphQLList(DeviceType),
             resolve(parent, args) {
-                return Device.find({ authorId: parent.id });
+                return Device.find({ userId: parent.id });
             }
         }
     })
@@ -54,12 +54,12 @@ const RootQuery = new GraphQLObjectType({
             }
         },
 
-        author: {
-            type: AuthorType,
+        user: {
+            type: UserType,
             args: { id: { type: GraphQLID } },
             resolve(parent, args) {
 
-                return Author.findById(args.id);
+                return User.findById(args.id);
             }
         },
 
@@ -71,11 +71,11 @@ const RootQuery = new GraphQLObjectType({
             } 
         },
 
-        authors: { 
-            type: new GraphQLList(AuthorType),
+        users: { 
+            type: new GraphQLList(UserType),
             resolve(parent, args) {
 
-                return Author.find({});
+                return User.find({});
             } 
         },
     }
@@ -85,19 +85,19 @@ const Mutation = new GraphQLObjectType({
     name: 'Mutation',
     fields: {
 
-        addAuthor: {
-            type: AuthorType,
+        addUser: {
+            type: UserType,
             args: { 
                 name: { type: new GraphQLNonNull(GraphQLString) }, 
                 age: { type: new GraphQLNonNull(GraphQLInt) },
             },
             resolve(parent, args) {
-                let author = new Author({
+                let user = new User({
                     name: args.name,
                     age: args.age,
                 });
 
-                return author.save();
+                return user.save();
             }
         },
 
@@ -106,13 +106,13 @@ const Mutation = new GraphQLObjectType({
             args: {
                 name: { type: new GraphQLNonNull(GraphQLString) },
                 genre: { type: new GraphQLNonNull(GraphQLString) },
-                authorId: { type: new GraphQLNonNull(GraphQLID) },
+                userId: { type: new GraphQLNonNull(GraphQLID) },
             },
             resolve(parent, args) {
                 let device = new Device({
                     name: args.name,
                     genre: args.genre,
-                    authorId: args.authorId,
+                    userId: args.userId,
                 });
 
                 return device.save();
