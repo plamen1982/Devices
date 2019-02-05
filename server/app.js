@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 
 //connect to mlab database
-mongoose.connect('mongodb://pax:graphql-ninja1@ds149754.mlab.com:49754/gql-ninja');
+mongoose.connect('mongodb://pax-admin:123abc@ds223015.mlab.com:23015/devices');
 mongoose.connection.once('open', () => {
     console.log('connected to the database in mlab');
 });
