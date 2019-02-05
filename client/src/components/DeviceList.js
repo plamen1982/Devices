@@ -15,6 +15,8 @@ class DeviceList extends Component {
 
     renderDevices() {
         const { data: { devices } } = this.props;
+        console.log(`from renderDevises`);
+        console.log(this.props);
         const { data: { loading } } = this.props;
         if(loading) {
             return <div>Loading Devices...</div>

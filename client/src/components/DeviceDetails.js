@@ -6,15 +6,16 @@ class DeviceDetails extends Component {
 
     renderDeviceDetails() {
         const { data: { device } } = this.props;
-
+        console.log('from renderDevideDetails');
+        console.log(this.props);
         if(device) {
-        const { data: { device: { author: { devices } } } } = this.props;
+        const { data: { device: { user: { devices } } } } = this.props;
             return (
                 <div>
                     <h2>{device.name}</h2>
                     <p>{device.genre}</p>
-                    <p>{device.author.name}</p>
-                    <p>All Devices by this author:</p>
+                    <p>{device.user.name}</p>
+                    <p>All Devices by this user:</p>
                     <ul className="other-books">
                         {devices.map(device => <li key={device.id}>{device.name}</li>)}
                     </ul>
