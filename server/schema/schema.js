@@ -1,5 +1,5 @@
 const graphql = require('graphql');
-const Book = require('../models/book');
+const Device = require('../models/device');
 const Author = require('../models/author');
 
 const { 
@@ -12,8 +12,8 @@ const {
     GraphQLNonNull,
 } = graphql;
 
-const BookType = new GraphQLObjectType({
-    name: 'Book',
+const DeviceType = new GraphQLObjectType({
+    name: 'Device',
     fields: () => ({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
@@ -33,10 +33,10 @@ const AuthorType = new GraphQLObjectType({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
         age: { type: GraphQLInt },
-        books: {
-            type: new GraphQLList(BookType),
+        Devices: {
+            type: new GraphQLList(DeviceType),
             resolve(parent, args) {
-                return Book.find({ authorId: parent.id });
+                return Device.find({ authorId: parent.id });
             }
         }
     })
@@ -45,12 +45,12 @@ const AuthorType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
-        book: {
-            type: BookType,
+        device: {
+            type: DeviceType,
             args: { id: { type: GraphQLID } }, 
             resolve(parent, args) {
 
-                return Book.findById(args.id);
+                return Device.findById(args.id);
             }
         },
 
@@ -63,11 +63,11 @@ const RootQuery = new GraphQLObjectType({
             }
         },
 
-        books: { 
-            type: new GraphQLList(BookType),
+        devices: { 
+            type: new GraphQLList(DeviceType),
             resolve(parent, args) {
 
-                return Book.find({});
+                return Device.find({});
             } 
         },
 
@@ -101,21 +101,21 @@ const Mutation = new GraphQLObjectType({
             }
         },
 
-        addBook: {
-            type: BookType,
+        addDevice: {
+            type: DeviceType,
             args: {
                 name: { type: new GraphQLNonNull(GraphQLString) },
                 genre: { type: new GraphQLNonNull(GraphQLString) },
                 authorId: { type: new GraphQLNonNull(GraphQLID) },
             },
             resolve(parent, args) {
-                let book = new Book({
+                let device = new Device({
                     name: args.name,
                     genre: args.genre,
                     authorId: args.authorId,
                 });
 
-                return book.save();
+                return device.save();
             }
         },
         

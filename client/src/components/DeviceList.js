@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo'; // graphql is the tool that helping us to bind the data from the query with the component
-import { getBooksQuery } from '../queries/queries';
+import { getDevicesQuery } from '../queries/queries';
 
 //components
-import BookDetails from './BookDetails';
+import DeviceDetails from './DeviceDetails';
 
-class BookList extends Component {
+class DeviceList extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -13,30 +13,30 @@ class BookList extends Component {
         }
     }
 
-    renderBooks() {
-        const { data: { books } } = this.props;
+    renderDevices() {
+        const { data: { devices } } = this.props;
         const { data: { loading } } = this.props;
         if(loading) {
-            return <div>Loading books...</div>
+            return <div>Loading Devices...</div>
         }
 
-        return books.map((book) => {
-            return (<li key={book.id} onClick={(e) => { this.setState({selected: book.id}) }}>{book.name}</li>)
+        return devices.map((device) => {
+            return (<li key={device.id} onClick={(e) => { this.setState({selected: device.id}) }}>{device.name}</li>)
         })
     }
   render() {
     return (
         <div>
             <ul id="book-list">
-                {this.renderBooks()}
+                {this.renderDevices()}
             </ul>
-            <BookDetails bookId={ this.state.selected }/>
+            <DeviceDetails deviceId={ this.state.selected }/>
         </div>
     );
   }
 }
 
-export default graphql(getBooksQuery)(BookList); //when component renders the data is requested with the query and the binding with the 
+export default graphql(getDevicesQuery)(DeviceList); //when component renders the data is requested with the query and the binding with the 
                                                 //component and the information from the query is stored in the this.props
 
 //1. constructing the query

@@ -3,8 +3,8 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo'; //binding react with apollo and inject data from the server into our app
 
 //components
-import BookList from './components/BookList';
-import AddBook from './components/AddBook';
+import DeviceList from './components/DeviceList';
+import AddDevice from './components/AddDevice';
 
 //apollo client setup
 const client = new ApolloClient({
@@ -17,9 +17,9 @@ class App extends Component {
     return (
       <ApolloProvider client={client}>
         <div id="main">
-          <h1>Ninja's Reading List</h1>
-          <BookList />
-          <AddBook />
+          <h1>Device List:</h1>
+          <DeviceList />
+          <AddDevice />
         </div>
       </ApolloProvider>
     );

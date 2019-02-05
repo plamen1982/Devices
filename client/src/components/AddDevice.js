@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { graphql, compose } from "react-apollo"; // graphql is the tool that helping us to bind the data from the query with the component
-import { getAuthorsQuery, addBookMutation, getBooksQuery } from "../queries/queries";
+import { getAuthorsQuery, addDeviceMutation, getDevicesQuery } from "../queries/queries";
 
-class AddBook extends Component {
+class AddDevice extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,14 +33,14 @@ class AddBook extends Component {
 
   submitForm = e => {
     e.preventDefault();
-    this.props.addBookMutation({
+    this.props.addDeviceMutation({
         variables: {
             name: this.state.name,
             genre: this.state.genre,
             authorId: this.state.authorId,
         },
         refetchQueries: [{
-            query: getBooksQuery
+            query: getDevicesQuery
         }]
     });
   };
@@ -49,7 +49,7 @@ class AddBook extends Component {
     return (
       <form id="add-book" onSubmit={this.submitForm}>
         <div className="field">
-          <label>Book name:</label>
+          <label>Device name:</label>
           <input
             type="text"
             onChange={e => this.setState({ name: e.target.value })}
@@ -79,8 +79,8 @@ class AddBook extends Component {
 
 export default compose(
   graphql(getAuthorsQuery, { name: "getAuthorsQuery" }), // getAuthorsQuery is going to be attached to this.props and inside is going to be the authors array
-  graphql(addBookMutation, { name: "addBookMutation" }) // addBookMutation is going to be attached to this.props
-)(AddBook); //when component renders the data is requested with the query and the binding with the
+  graphql(addDeviceMutation, { name: "addDeviceMutation" }) // addDeviceMutation is going to be attached to this.props
+)(AddDevice); //when component renders the data is requested with the query and the binding with the
 //component and the information from the query is stored in the this.props
 //compose is used for binding several queries to one component
 

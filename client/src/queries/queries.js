@@ -9,18 +9,18 @@ const getAuthorsQuery = gql`
   }
 `;
 
-const getBooksQuery = gql`
+const getDevicesQuery = gql`
   {
-    books {
+    devices {
       name
       id
     }
   }
 `;
 
-const getBookQuery = gql`
-  query GetBook($id: ID) {
-    book(id: $id) {
+const getDeviceQuery = gql`
+  query GetDevice($id: ID) {
+    device(id: $id) {
       id
       name
       genre
@@ -28,7 +28,7 @@ const getBookQuery = gql`
         id
         name
         age
-        books {
+        devices {
           name
           id
         }
@@ -37,10 +37,10 @@ const getBookQuery = gql`
   }
 `;
 
-//$name, $genre and $authorId are comming where addBookMutation is called and what is inside the variables object
-const addBookMutation = gql`
-  mutation AddBook($name: String!, $genre: String!, $authorId: ID!) {
-    addBook(name: $name, genre: $genre, authorId: $authorId) {
+//$name, $genre and $authorId are comming where addDeviceMutation is called and what is inside the variables object
+const addDeviceMutation = gql`
+  mutation AddDevice($name: String!, $genre: String!, $authorId: ID!) {
+    addDevice(name: $name, genre: $genre, authorId: $authorId) {
       name
       id
     }
@@ -48,4 +48,4 @@ const addBookMutation = gql`
 `;
 //String! - or ! means non empty in this case String
 
-export { getAuthorsQuery, getBooksQuery, addBookMutation, getBookQuery };
+export { getAuthorsQuery, getDevicesQuery, addDeviceMutation, getDeviceQuery };
