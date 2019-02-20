@@ -23,7 +23,7 @@ const getDeviceQuery = gql`
     device(id: $id) {
       id
       name
-      genre
+      model
       user {
         id
         name
@@ -37,10 +37,10 @@ const getDeviceQuery = gql`
   }
 `;
 
-//$name, $genre and $userId are comming where addDeviceMutation is called and what is inside the variables object
+//$name, $model and $userId are comming where addDeviceMutation is called and what is inside the variables object
 const addDeviceMutation = gql`
-  mutation AddDevice($name: String!, $genre: String!, $userId: ID!) {
-    addDevice(name: $name, genre: $genre, userId: $userId) {
+  mutation AddDevice($name: String!, $model: String!, $userId: ID!) {
+    addDevice(name: $name, model: $model, userId: $userId) {
       name
       id
     }

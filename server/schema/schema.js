@@ -17,7 +17,7 @@ const DeviceType = new GraphQLObjectType({
     fields: () => ({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
-        genre: { type: GraphQLString },
+        model: { type: GraphQLString },
         user: {
             type: UserType,
             resolve(parent, args) {
@@ -105,13 +105,13 @@ const Mutation = new GraphQLObjectType({
             type: DeviceType,
             args: {
                 name: { type: new GraphQLNonNull(GraphQLString) },
-                genre: { type: new GraphQLNonNull(GraphQLString) },
+                model: { type: new GraphQLNonNull(GraphQLString) },
                 userId: { type: new GraphQLNonNull(GraphQLID) },
             },
             resolve(parent, args) {
                 let device = new Device({
                     name: args.name,
-                    genre: args.genre,
+                    model: args.model,
                     userId: args.userId,
                 });
 

@@ -7,7 +7,7 @@ class AddDevice extends Component {
     super(props);
     this.state = {
       name: "",
-      genre: "",
+      model: "",
       userId: ""
     };
   }
@@ -36,7 +36,7 @@ class AddDevice extends Component {
     this.props.addDeviceMutation({
         variables: {
             name: this.state.name,
-            genre: this.state.genre,
+            model: this.state.model,
             userId: this.state.userId,
         },
         refetchQueries: [{
@@ -57,10 +57,10 @@ class AddDevice extends Component {
           />
         </div>
         <div className="field">
-          <label>Genre:</label>
+          <label>model:</label>
           <input
             type="text"
-            onChange={e => this.setState({ genre: e.target.value })}
+            onChange={e => this.setState({ model: e.target.value })}
             required
           />
         </div>

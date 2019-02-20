@@ -13,7 +13,7 @@ class DeviceDetails extends Component {
             return (
                 <div>
                     <h2>{device.name}</h2>
-                    <p>{device.genre}</p>
+                    <p>{device.model}</p>
                     <p>{device.user.name}</p>
                     <p>All Devices by this user:</p>
                     <ul className="other-books">

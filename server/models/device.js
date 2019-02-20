@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const deviceSchema = new Schema({
     name: String,
-    genre: String,
+    model: String,
     userId: String,
 });
 
