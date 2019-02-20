@@ -7,7 +7,6 @@ const {
     GraphQLString, 
     GraphQLSchema,  
     GraphQLID, 
-    GraphQLInt, 
     GraphQLList,
     GraphQLNonNull,
 } = graphql;
@@ -32,7 +31,7 @@ const UserType = new GraphQLObjectType({
     fields: () => ({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
-        age: { type: GraphQLInt },
+        position: { type: GraphQLString },
         devices: {
             type: new GraphQLList(DeviceType),
             resolve(parent, args) {
@@ -89,12 +88,12 @@ const Mutation = new GraphQLObjectType({
             type: UserType,
             args: { 
                 name: { type: new GraphQLNonNull(GraphQLString) }, 
-                age: { type: new GraphQLNonNull(GraphQLInt) },
+                position: { type: new GraphQLNonNull(GraphQLString) },
             },
             resolve(parent, args) {
                 let user = new User({
                     name: args.name,
-                    age: args.age,
+                    position: args.position,
                 });
 
                 return user.save();

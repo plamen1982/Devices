@@ -27,7 +27,7 @@ const getDeviceQuery = gql`
       user {
         id
         name
-        age
+        position
         devices {
           name
           id

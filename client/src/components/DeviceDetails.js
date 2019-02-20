@@ -12,10 +12,10 @@ class DeviceDetails extends Component {
         const { data: { device: { user: { devices } } } } = this.props;
             return (
                 <div>
-                    <h2>{device.name}</h2>
-                    <p>{device.model}</p>
-                    <p>{device.user.name}</p>
-                    <p>All Devices by this user:</p>
+                    <h2>Device name: {device.name}</h2>
+                    <p>Model: {device.model}</p>
+                    <p>Created by User: {device.user.name}</p>
+                    <p>All Devices created by this user:</p>
                     <ul className="other-books">
                         {devices.map(device => <li key={device.id}>{device.name}</li>)}
                     </ul>

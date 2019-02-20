@@ -57,7 +57,7 @@ class AddDevice extends Component {
           />
         </div>
         <div className="field">
-          <label>model:</label>
+          <label>Model:</label>
           <input
             type="text"
             onChange={e => this.setState({ model: e.target.value })}
